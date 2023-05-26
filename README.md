@@ -1,4 +1,4 @@
-# Twikle User-content Flaging/Restriction Smart Contracts 
+# Twikkl User-content Flaging/Restriction Smart Contracts 
 
 ## Installation
 
