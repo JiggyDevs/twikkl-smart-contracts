@@ -16,7 +16,51 @@ struct AppStorage {
 
     address[] public EligibleVoters;
 
-    struct public VotersDetails {
+    address[] public flaggedContentBank;
+
+    struct public Content {
+      string contentName;
+
+      address contentCreator;
+
+      uint256 contentID;
+
+      bool flagged;
+
+      uint256 flaggedTimestamp;
+      
+      address flaggedBy;
+
+      string reasonForFlagging;
+
+      string contentDescription;
+
+      bool isVotedOn;
+
+      address[] voters;
+
+      uint256 totalVoteCount;
+
+      uint256 flaggedVotes;
+
+      uint256 yesVotes;
+
+      uint256 noVotes;
+
+    }
+
+    struct public flaggedContent {
+
+      uint256 contentID;
+
+      uint256 flaggedTimestamp;
+
+      address flaggedBy;
+
+
+    }
+
+    struct public _VotersDetails {
 
       address public _voterAddress;
 
@@ -26,16 +70,7 @@ struct AppStorage {
       
     }
 
-    
-    mapping(address => uint256)  _balances;
+    mapping (address => _VotersDetails) _Votes;
 
-    mapping(address => mapping(address => uint256))  _allowances;
-
-    uint256  _totalSupply;
-
-    string  _name;
-
-    string  _symbol;
-
-    uint8 _decimal;
+   
 }
