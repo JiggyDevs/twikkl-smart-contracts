@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 import "../libraries/AppStorage.sol";
 
-contract FlagContentFacet  {
+contract VoteContent  {
     AppStorage internal s;
 
     
