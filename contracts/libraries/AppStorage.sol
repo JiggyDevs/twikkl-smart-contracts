@@ -8,6 +8,8 @@ struct AppStorage {
 
     NFT address public _nftAddress;
 
+    uint256 public _totalFlaggedContent;
+
     uint256 public _voteCount;
 
     uint256 public _votingTime;
@@ -15,8 +17,6 @@ struct AppStorage {
     bool public _isVotingOn;
 
     address[] public EligibleVoters;
-
-    address[] public flaggedContentBank;
 
     struct public Content {
       string contentName;
@@ -72,5 +72,5 @@ struct AppStorage {
 
     mapping (address => _VotersDetails) _Votes;
 
-   
+    mapping(uint256 => flaggedContent) public flaggedContents;
 }
