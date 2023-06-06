@@ -14,6 +14,8 @@ struct AppStorage {
 
     uint256 public _votingTime;
 
+    uint256 public _totalVoters;
+
     bool public _isVotingOn;
 
     address[] public EligibleVoters;
@@ -70,7 +72,7 @@ struct AppStorage {
       
     }
 
-    mapping (address => _VotersDetails) _Votes;
+    mapping (address => _VotersDetails) _Voters;
 
     mapping(uint256 => flaggedContent) public flaggedContents;
 }
