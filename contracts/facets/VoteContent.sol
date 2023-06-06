@@ -23,22 +23,24 @@ contract VoteContent  {
 
     bool public _isVotingOn;
 
-    address[] public EligibleVoters;
+    mapping(address => bool) public EligibleVoters;
 
     event VoteCast(address indexed voter, bool vote);
 
-    function getRandomVoters() public returns {
-       // get 3 random voters with details from voters mapping
+    function getRandomVoters() public {
+        require(s.totalVoters >= 3, "Not enough voters to select from");
 
-       // and store them in the eligibleVoters array
-        uint256[] memory randomIndices = _generateRandomIndices(3, s._totalVoters);
+        uint256[] memory randomIndices = _generateRandomIndices(3, s.totalVoters);
 
+        // get 3 random voters with details from voters mapping
         for (uint256 i = 0; i < randomIndices.length; i++) {
             uint256 randomIndex = randomIndices[i];
-            eligibleVoters.push(voters[randomIndex].voterAddress);
-        }
+            address selectedVoter = voters[randomIndex].voterAddress;
 
+            eligibleVoters[selectedVoter] = true;
+        }
     }
+
 
     function vote(bool voteValue) public {
 
@@ -53,6 +55,7 @@ contract VoteContent  {
 
         // checks that the voters are in eligible voters array
         require(isEligibleVoter(msg.sender), "You are not eligible to vote");
+        
 
         //require that voters have NFT and ERC20 token in their wallet
          require(hasNFTAndERC20Token(msg.sender), "You must have the required NFT and ERC20 token to vote");
@@ -89,13 +92,8 @@ contract VoteContent  {
     }
 
     function isEligibleVoter(address voter) internal view returns (bool) {
-        // Logic to check if the given address is an eligible voter by verifying if it exists in the eligibleVoters array
-        for (uint256 i = 0; i < eligibleVoters.length; i++) {
-            if (eligibleVoters[i] == voter) {
-                return true;
-            }
-        }
-        return false;
+        // Logic to check if the given address is an eligible voter by verifying if it exists in the eligibleVoters mapping
+        return eligibleVoters[voter];
     }
 
     // check if the given address has the required NFT and ERC20 token in their wallet
@@ -123,12 +121,9 @@ contract VoteContent  {
     }
 
     function allVotersHaveVoted() internal view returns (bool) {
-        // Implement the logic to check if all eligible voters have voted
-        // by iterating through the eligibleVoters array and checking their
-        // voting status in the voters mapping
-        for (uint256 i = 0; i < eligibleVoters.length; i++) {
-            VoterDetails storage voter = voters[getVoterIndex(eligibleVoters[i])];
-            if (!s.voter.hasVoted) {
+        // logic to check if all eligible voters have voted by iterating through the eligibleVoters mapping and checking their voting status
+        for (address voter : eligibleVoters) {
+            if (!voters[voter].hasVoted) {
                 return false;
             }
         }
