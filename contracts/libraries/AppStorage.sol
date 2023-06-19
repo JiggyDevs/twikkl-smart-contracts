@@ -4,6 +4,23 @@ pragma solidity ^0.8.0;
 
 struct AppStorage {
 
+   // Twikkle Token 
+
+    uint256  _totalSupply;
+
+    string  _name;
+
+    string  _symbol;
+
+    uint8 _decimal;
+
+    mapping(address => mapping(address => uint256)) allowances;
+
+    mapping(address => uint256) balances;  
+
+
+    // FlagContent Facet
+
     Token address public _tokenAddress;
 
     NFT address public _nftAddress;
