@@ -7,24 +7,6 @@ import "../libraries/AppStorage.sol";
 contract VoteContent  {
     AppStorage internal s;
 
-    struct public _VotersDetails {
-
-      address public _voterAddress;
-
-      bool public _hasVoted;
-
-      bool public _vote;
-      
-    }
-
-    mapping (uint256 => _VotersDetails) _Voters;
-
-    uint256 public _votingTime;
-
-    bool public _isVotingOn;
-
-    mapping(address => bool) public EligibleVoters;
-
     event VoteCast(address indexed voter, bool vote);
 
     function getRandomVoters() public {
@@ -36,8 +18,7 @@ contract VoteContent  {
         for (uint256 i = 0; i < randomIndices.length; i++) {
             uint256 randomIndex = randomIndices[i];
             address selectedVoter = voters[randomIndex].voterAddress;
-
-            eligibleVoters[selectedVoter] = true;
+            s.EligibleVoters[selectedVoter] = true;
         }
     }
 
@@ -84,8 +65,8 @@ contract VoteContent  {
         }
 
         // Stop voting time if vote time elapses
-        // if (block.timestamp >= _votingTime + 1 hours) {
-        //    _isVotingOn = false;
+        // if (block.timestamp >= s._votingTime + 1 hours) {
+        //    s._isVotingOn = false;
         // }
 
         emit VoteCast(msg.sender, voteValue);
@@ -93,7 +74,7 @@ contract VoteContent  {
 
     function isEligibleVoter(address voter) internal view returns (bool) {
         // Logic to check if the given address is an eligible voter by verifying if it exists in the eligibleVoters mapping
-        return eligibleVoters[voter];
+        return s.EligibleVoters[voter];
     }
 
     // check if the given address has the required NFT and ERC20 token in their wallet
@@ -122,7 +103,7 @@ contract VoteContent  {
 
     function allVotersHaveVoted() internal view returns (bool) {
         // logic to check if all eligible voters have voted by iterating through the eligibleVoters mapping and checking their voting status
-        for (address voter : eligibleVoters) {
+        for (address voter : s.EligibleVoters) {
             if (!voters[voter].hasVoted) {
                 return false;
             }
