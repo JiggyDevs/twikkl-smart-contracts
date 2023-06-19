@@ -1,4 +1,34 @@
-# Twikkl User-content Flaging/Restriction Smart Contracts 
+# Welcome To Twikkl Smart Contracts!
+
+Twikkle smart contracts consist of User-content Flaging and Restriction smart contracts. The contracts implement the EIP-2535 Diamonds standard, which allows for modular upgradeability.
+
+Twikkle is a decentralized video sharing app with social services and more.
+
+We also have one of the frenliest communities in crypto, so don't hesitate to hop in!
+
+Twikkle Discord: https://discord.gg/dAxGUfss
+
+
+## Deployed Contract Addresses:
+Twikkle were born on the Polygon sidechain, and have since been bridged back to Ethereum. Below are the deployed Diamond addresses:
+
+As of 11/24/2022, the ERC1155 NFTs previously located in AavegotchiDiamond (0x869) have been migrated to a separate WearableDiamond.
+
+Twikkle Address (FlagContent contract and storage): 
+
+Twikkle Address (VoteContent contract):  
+
+
+
+## Resources
+Official docs: Coming soon!
+
+Louper Dev Diamond Explorer: Coming soon!
+
+Official Subgraph: Coming soon!
+
+EIP2535 Primer: https://eips.ethereum.org/EIPS/eip-2535
+
 
 ## Installation
 
