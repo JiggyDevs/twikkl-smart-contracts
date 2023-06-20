@@ -13,11 +13,11 @@ contract TwikklToken is IERC20 {
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
     function name() external pure returns (string memory) {
-        return "Twikkl";
+        return "Jiggy";
     }
 
     function symbol() external pure returns (string memory) {
-        return "Twk";
+        return "JGY";
     }
 
     function decimals() external pure returns (uint8) {
