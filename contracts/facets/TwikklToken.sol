@@ -2,26 +2,26 @@
 pragma solidity ^0.8.9;
 
 import "../interfaces/IERC20.sol";
-import "../libraries/AppStorage.sol"
+import {ERC20AppStorage} from "../libraries/AppStorage.sol";
 
-contract TwikklToken is IERC20 {
+contract TwiklToken is IERC20 {
     
-    AppStorage internal s;
+    ERC20AppStorage internal s;
 
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
-    function name() external pure returns (string memory) {
-        return "Jiggy";
+    function name() external view returns (string memory) {
+        return s.name;
     }
 
-    function symbol() external pure returns (string memory) {
-        return "JGY";
+    function symbol() external view returns (string memory) {
+        return s.symbol;
     }
 
-    function decimals() external pure returns (uint8) {
-        return 18;
+    function decimals() external view returns (uint8) {
+        return s.decimals;
     }
 
     function totalSupply() public view returns (uint256) {
@@ -52,7 +52,7 @@ contract TwikklToken is IERC20 {
         require(owner != address(0), "Twikkl Token: approve from the zero address");
         require(spender != address(0), "Twikkl Token: approve to the zero address");
 
-        s._allowances[owner][spender] = amount;
+        s.allowances[owner][spender] = amount;
         emit Approval(owner, spender, amount);
     }
 
@@ -61,12 +61,12 @@ contract TwikklToken is IERC20 {
 
         _beforeTokenTransfer(account, address(0), amount);
 
-        uint256 accountBalance = s._balances[account];
+        uint256 accountBalance = s.balances[account];
         require(accountBalance >= amount, "ERC20: burn amount exceeds balance");
         unchecked {
-            s._balances[account] = accountBalance - amount;
+            s.balances[account] = accountBalance - amount;
             // Overflow not possible: amount <= accountBalance <= totalSupply.
-            s._totalSupply -= amount;
+            s.totalSupply -= amount;
         }
 
         emit Transfer(account, address(0), amount);
@@ -79,10 +79,10 @@ contract TwikklToken is IERC20 {
 
         _beforeTokenTransfer(address(0), account, amount);
 
-        s._totalSupply += amount;
+        s.totalSupply += amount;
         unchecked {
             // Overflow not possible: balance + amount is at most totalSupply + amount, which is checked above.
-            s._balances[account] += amount;
+            s.balances[account] += amount;
         }
         emit Transfer(address(0), account, amount);
 
@@ -101,7 +101,7 @@ contract TwikklToken is IERC20 {
     }
 
     function allowance(address owner, address spender) public view override returns (uint256) {
-        return s._allowances[owner][spender];
+        return s.allowances[owner][spender];
     }
 
     function _transfer(
@@ -114,13 +114,12 @@ contract TwikklToken is IERC20 {
 
         _beforeTokenTransfer(from, to, amount);
 
-        uint256 fromBalance = s._balances[from];
+        uint256 fromBalance = s.balances[from];
         require(fromBalance >= amount, "ERC20: transfer amount exceeds balance");
         unchecked {
-            s._balances[from] = fromBalance - amount;
-            // Overflow not possible: the sum of all balances is capped by totalSupply, and the sum is preserved by
-            // decrementing then incrementing.
-            s._balances[to] += amount;
+            s.balances[from] = fromBalance - amount;
+            // Overflow not possible: the sum of all balances is capped by totalSupply, and the sum is preserved by decrementing then incrementing.
+            s.balances[to] += amount;
         }
 
         emit Transfer(from, to, amount);

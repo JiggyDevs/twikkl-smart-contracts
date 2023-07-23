@@ -2,42 +2,49 @@
 
 pragma solidity ^0.8.0;
 
-struct AppStorage {
+struct ERC20AppStorage {
 
-   // Twikkle Token 
+    // Twikkle Token 
+    uint256  totalSupply;
 
-    uint256  _totalSupply;
+    string  name;
 
-    string  _name;
+    string  symbol;
 
-    string  _symbol;
-
-    uint8 _decimal;
+    uint8 decimals;
 
     mapping(address => mapping(address => uint256)) allowances;
 
-    mapping(address => uint256) balances;  
+    mapping(address => uint256) balances; 
 
 
-    // FlagContent Facet
+}
 
-    Token address public _tokenAddress;
+struct ERC721AppStorage {
 
-    NFT address public _nftAddress;
+   // Twikle NFT name
+    string name;
 
-    uint256 public _totalFlaggedContent;
+    // Twikle symbol
+    string symbol;
 
-    uint256 public _voteCount;
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) owners;
 
-    uint256 public _votingTime;
+    // Mapping owner address to token count
+    mapping(address => uint256) balances;
 
-    uint256 public _totalVoters;
+    // Mapping from token ID to approved address
+    mapping(uint256 => address)  tokenApprovals;
 
-    bool public _isVotingOn;
+    // Mapping from owner to operator approvals
+    mapping(address => mapping(address => bool)) operatorApprovals;
 
-    mapping(address => bool) public EligibleVoters;
+}
 
-    struct public Content {
+
+struct Content {
+
       string contentName;
 
       address contentCreator;
@@ -66,9 +73,9 @@ struct AppStorage {
 
       uint256 noVotes;
 
-    }
+}
 
-    struct public flaggedContent {
+struct flaggedContent {
 
       uint256 contentID;
 
@@ -76,20 +83,45 @@ struct AppStorage {
 
       address flaggedBy;
 
+}
 
-    }
+struct VotersDetails {
 
-    struct public _VotersDetails {
+      address voterAddress;
 
-      address public _voterAddress;
+      bool hasVoted;
 
-      bool public _hasVote;
-
-      bool public _vote;
+      bool vote;
       
-    }
+}
 
-    mapping (uint256 => _VotersDetails) _Voters;
 
-    mapping(uint256 => flaggedContent) public flaggedContents;
+struct AppStorage {
+
+    // FlagContent Facet
+
+    address _tokenAddress;
+
+    address _nftAddress;
+
+    uint256 _totalFlaggedContent;
+
+    uint256 _voteCount;
+
+    uint256 _votingTime;
+
+    uint256 _totalVoters;
+
+    bool _isVotingOn;
+
+mapping(uint256 => Content) ContentBank;
+
+// mapping(address => bool) EligibleVoters;
+
+address[] EligibleVoters;
+
+mapping (address => VotersDetails) Voters;
+
+mapping(uint256 => flaggedContent) flaggedContents;
+
 }

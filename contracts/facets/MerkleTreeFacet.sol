@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
-contract MerkleTreeWhitelist is Ownable {
+contract MerkleTreeFacet is Ownable {
 
   /**
   * @notice Merkle root hash for whitelist addresses

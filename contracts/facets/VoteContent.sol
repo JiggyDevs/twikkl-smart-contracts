@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.9;
 
-import "../libraries/AppStorage.sol";
+import {AppStorage, Content, VotersDetails} from "../libraries/AppStorage.sol";
+import "../interfaces/IERC20.sol";
+import "../interfaces/IERC721.sol";
+
 
 contract VoteContent  {
     AppStorage internal s;
@@ -10,26 +13,26 @@ contract VoteContent  {
     event VoteCast(address indexed voter, bool vote);
 
     function getRandomVoters() public {
-        require(s.totalVoters >= 3, "Not enough voters to select from");
+        require(s._totalVoters >= 3, "Not enough voters to select from");
 
-        uint256[] memory randomIndices = _generateRandomIndices(3, s.totalVoters);
+        uint256[] memory randomIndices = _generateRandomIndices(3, s._totalVoters);
 
         // get 3 random voters with details from voters mapping
         for (uint256 i = 0; i < randomIndices.length; i++) {
             uint256 randomIndex = randomIndices[i];
-            address selectedVoter = voters[randomIndex].voterAddress;
-            s.EligibleVoters[selectedVoter] = true;
+            address selectedVoter = s.Voters[msg.sender].voterAddress;
+            s.EligibleVoters.push(selectedVoter);
         }
     }
 
 
-    function vote(bool voteValue) public {
+    function vote(bool voteValue, uint256 contentID) public {
 
         // checks if voting time is on, if not, dont allow to vote
-        require(!s._isVotingOn, "Wait for voting time please!");
+        require(s._isVotingOn, "Wait for voting time please!");
 
         // if voting time is off, start voting vote
-        if (!s._votingTime) {
+        if (s._votingTime > block.timestamp) {
             s._isVotingOn = true;
            s._votingTime = block.timestamp;
         }
@@ -42,26 +45,30 @@ contract VoteContent  {
          require(hasNFTAndERC20Token(msg.sender), "You must have the required NFT and ERC20 token to vote");
 
         // check if voter has already voted
-        VoterDetails storage voter = voters[getVoterIndex(msg.sender)];
-        require(!s.voter.hasVoted, "You have already voted");
+        VotersDetails memory voter = s.Voters[msg.sender];
+        require(!voter.hasVoted, "You have already voted");
 
         //allow them cast a yes or no vote
-        s.voter.hasVoted = true;
-        s.voter.vote = voteValue;
+        voter.hasVoted = true;
+        voter.vote = voteValue;
+
+        Content storage updateContent = s.ContentBank[contentID];
 
         // increment votes count for either yes or no votes
         if (voteValue) {
-            s.yesVotes++;
+            updateContent.yesVotes++;
         } else {
-            s.noVotes++;
+            updateContent.noVotes++;
         }
+
+        updateContent.isVotedOn = true;
 
         // stop voting time
 
         // Stop voting time if all eligible voters have voted
         if (allVotersHaveVoted()) {
-            s.isVotingOn = false;
-            s._votingTime = 0
+            s._isVotingOn = false;
+            s._votingTime = 0;
         }
 
         // Stop voting time if vote time elapses
@@ -72,42 +79,85 @@ contract VoteContent  {
         emit VoteCast(msg.sender, voteValue);
     }
 
+    // function isEligibleVoter(address voter) internal view returns (bool) {
+    //     // Logic to check if the given address is an eligible voter by verifying if it exists in the eligibleVoters mapping
+    //     return s.EligibleVoters[voter];
+    // }
+
     function isEligibleVoter(address voter) internal view returns (bool) {
-        // Logic to check if the given address is an eligible voter by verifying if it exists in the eligibleVoters mapping
-        return s.EligibleVoters[voter];
+    // Iterate through the eligible voters array to check if the given address is present
+        for (uint256 i = 0; i < s.EligibleVoters.length; i++) {
+            if (s.EligibleVoters[i] == voter) {
+                // If the given address is found in the array, return true (i.e., the voter is eligible)
+                return true;
+            }
+        }
+
+        // If the given address is not found in the array, return false (i.e., the voter is not eligible)
+        return false;
     }
 
     // check if the given address has the required NFT and ERC20 token in their wallet
     function hasNFTAndERC20Token(address voter) internal view returns (bool) {
 
+    uint256 tokenId = 20;
     // Check if the voter owns the NFT
-    bool hasNFT = YourNFTContract(s._nftAddress).ownerOf(tokenId) == voter; 
+    bool hasNFT = IERC721(s._nftAddress).ownerOf(tokenId) == voter; 
 
     // Check if the voter has the ERC20 token balance
-    uint256 erc20Balance = YourERC20Contract(s._tokenAddress).balanceOf(voter); 
+    uint256 erc20Balance = IERC20(s._tokenAddress).balanceOf(voter); 
 
     return hasNFT && (erc20Balance > 0);
     }
 
 
+    // function getVoterIndex(address voter) internal view returns (uint256) {
+    //     // Implement the logic to retrieve the index of the given voter address
+    //     // from the voters mapping
+    //     for (uint256 i = 0; i < s._totalVoters; i++) {
+    //         if (s.Voters[i].voterAddress == voter) {
+    //             return i;
+    //         }
+    //     }
+    //     revert("Voter not found");
+    // }
+
     function getVoterIndex(address voter) internal view returns (uint256) {
         // Implement the logic to retrieve the index of the given voter address
-        // from the voters mapping
-        for (uint256 i = 0; i < s.totalVoters; i++) {
-            if (s.voters[i].voterAddress == voter) {
+        // from the eligibleVoters array
+        for (uint256 i = 0; i < s.EligibleVoters.length; i++) {
+            if (s.EligibleVoters[i] == voter) {
                 return i;
             }
         }
         revert("Voter not found");
     }
 
+    // function allVotersHaveVoted() internal view returns (bool) {
+    //     // logic to check if all eligible voters have voted by iterating through the eligibleVoters mapping and checking their voting status
+    //     // address voter =  s.EligibleVoters;
+    //     // s.EligibleVoters[voter]
+    //     for (uint256 i = 0; i < s._totalVoters; i++) {
+    //         if (!s.Voters[voter].hasVoted) {
+    //             return false;
+    //         }
+    //     }
+        
+    //     return true;
+        
+    // }
+
     function allVotersHaveVoted() internal view returns (bool) {
-        // logic to check if all eligible voters have voted by iterating through the eligibleVoters mapping and checking their voting status
-        for (address voter : s.EligibleVoters) {
-            if (!voters[voter].hasVoted) {
+        // Iterate through the eligible voters array and check their voting status
+        for (uint256 i = 0; i < s.EligibleVoters.length; i++) {
+            address voter = s.EligibleVoters[i];
+            if (!s.Voters[voter].hasVoted) {
+                // If any eligible voter has not voted, return false
                 return false;
             }
         }
+
+        // If all eligible voters have voted, return true
         return true;
     }
 

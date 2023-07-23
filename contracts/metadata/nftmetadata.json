@@ -1,0 +1,20 @@
+{
+  "description": "Twikkle is ",
+  "external_url": "https://github.com/JiggyDevs",
+  "image": "ipfs://QmZKMnmVLre9c9cxKCd4DXZzv6etAtQQrryDGMKtsRaqNR",
+  "name": "Twikkl NFT",
+  "attributes": [
+    {
+      "trait_type": "Cause",
+      "value": "Twikkl NFT Token"
+    },
+    {
+      "trait_type": "Token Standard",
+      "value": "ERC721"
+    },
+    {
+      "trait_type": "Date",
+      "value": "20th July 2023"
+    }
+  ]
+}
