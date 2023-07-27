@@ -17,6 +17,7 @@ Twikkle Address (FlagContent contract and storage):
 
 Twikkle Address (VoteContent contract):  
 
+TwiklToken Address: 0x74efcAe1D5659c25717B4A5924152E7358F1f5db
 
 
 ## Resources
