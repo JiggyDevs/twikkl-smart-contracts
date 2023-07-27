@@ -1,0 +1,161 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "LibDiamond",
+  "sourceName": "contracts/libraries/LibDiamond.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "EmptyCalldata",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "selector",
+          "type": "bytes4"
+        }
+      ],
+      "name": "ImmutableFunction",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InValidFacetCutAction",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InitCallFailed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "MustBeZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NoCode",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NoSelectorsInFacet",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NoZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NonEmptyCalldata",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "selector",
+          "type": "bytes4"
+        }
+      ],
+      "name": "NonExistentSelector",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotDiamondOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "selector",
+          "type": "bytes4"
+        }
+      ],
+      "name": "SameSelectorReplacement",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "selector",
+          "type": "bytes4"
+        }
+      ],
+      "name": "SelectorExists",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "facetAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "enum IDiamondCut.FacetCutAction",
+              "name": "action",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes4[]",
+              "name": "functionSelectors",
+              "type": "bytes4[]"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct IDiamondCut.FacetCut[]",
+          "name": "_diamondCut",
+          "type": "tuple[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_init",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "_calldata",
+          "type": "bytes"
+        }
+      ],
+      "name": "DiamondCut",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220dc1a2a2cfd40aa57054875eae1781a4d2d7ee1050dba307ee0d2dfc55512b6ef64736f6c63430008090033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220dc1a2a2cfd40aa57054875eae1781a4d2d7ee1050dba307ee0d2dfc55512b6ef64736f6c63430008090033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
