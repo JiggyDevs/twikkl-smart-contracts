@@ -8,11 +8,13 @@ const ALCHEMY_GOERLI_API_KEY_URL = process.env.ALCHEMY_GOERLI_API_KEY_URL;
 
 const ALCHEMY_MUMBAI_API_KEY_URL = process.env.ALCHEMY_MUMBAI_API_KEY_URL;
 
+const ALCHEMY_SEPOLIA_API_KEY = process.env.ALCHEMY_SEPOLIA_API_KEY;
+
 //contract address key
 const ACCOUNT_PRIVATE_KEY = process.env.ACCOUNT_PRIVATE_KEY;
 
 //beneficial address key
-const ACCOUNT_PRIVATE_KEY2 = process.env.ACCOUNT_PRIVATE_KEY2;
+// const ACCOUNT_PRIVATE_KEY2 = process.env.ACCOUNT_PRIVATE_KEY2;
 
 const INFURA_MAINNET_API_URL = process.env.INFURA_MAINNET_API_KEY_URL;
 
@@ -30,6 +32,10 @@ module.exports = {
     },
     mumbai: {
       url: ALCHEMY_MUMBAI_API_KEY_URL,
+      accounts: [ACCOUNT_PRIVATE_KEY],
+    },
+    sepolia: {
+      url: ALCHEMY_SEPOLIA_API_KEY,
       accounts: [ACCOUNT_PRIVATE_KEY],
     }
   },

@@ -16,7 +16,7 @@ contract Diamond {
     ERC20AppStorage internal s;
     ERC721AppStorage internal p;
 
-    constructor(address _contractOwner, address _diamondCutFacet,  uint256 ERC20totalSupply, string memory ERC20name, string memory  ERC20symbol, uint8 ERC20decimal ) payable {
+    constructor(address _contractOwner, address _diamondCutFacet,  uint256 ERC20totalSupply, string memory ERC20name, string memory  ERC20symbol, uint8 ERC20decimal, string memory NFTname, string memory NFTsymbol ) payable {
         LibDiamond.setContractOwner(_contractOwner);
 
         // Add the diamondCut external function from the diamondCutFacet
@@ -29,14 +29,15 @@ contract Diamond {
             functionSelectors: functionSelectors
         });
         LibDiamond.diamondCut(cut, address(0), "");
-
+        // Twikkl ERC20 Token Variables
         s.name = ERC20name;   
         s.totalSupply = ERC20totalSupply * 10**ERC20decimal;
         s.symbol = ERC20symbol;
         s.decimals = ERC20decimal;
         
-        // p.name = name; 
-        // p.symbol = symbol;
+        // Twikkl ERC721 Token Variables
+        p.name = NFTname; 
+        p.symbol = NFTsymbol;
     }
 
     // Find facet for function that is called and execute the

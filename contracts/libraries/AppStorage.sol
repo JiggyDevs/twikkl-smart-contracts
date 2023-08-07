@@ -22,24 +22,24 @@ struct ERC20AppStorage {
 
 struct ERC721AppStorage {
 
-   // Twikle NFT name
-    string name;
+    // Twikle NFT name
+    string private _name;
 
     // Twikle symbol
-    string symbol;
+    string private _symbol;
 
     // Mapping from token ID to owner address
-    mapping(uint256 => address) owners;
+    mapping(uint256 => address) private _owners;
+
 
     // Mapping owner address to token count
-    mapping(address => uint256) balances;
+    mapping(address => uint256) private _balances;
 
     // Mapping from token ID to approved address
-    mapping(uint256 => address)  tokenApprovals;
+    mapping(uint256 => address) private _tokenApprovals;
 
     // Mapping from owner to operator approvals
-    mapping(address => mapping(address => bool)) operatorApprovals;
-
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
 }
 
 
