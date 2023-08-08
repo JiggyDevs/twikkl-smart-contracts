@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
@@ -36,7 +36,6 @@ contract MerkleTreeFacet is Ownable {
   {
       require(verifyAddress(_merkleProof), "INVALID_PROOF");
 
-      // Do some useful stuff
   }
 
 }

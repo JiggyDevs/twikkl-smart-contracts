@@ -19,7 +19,8 @@ const ACCOUNT_PRIVATE_KEY = process.env.ACCOUNT_PRIVATE_KEY;
 const INFURA_MAINNET_API_URL = process.env.INFURA_MAINNET_API_KEY_URL;
 
 module.exports = {
-  solidity: "0.8.9",
+  solidity: "0.8.17",
+  defaultNetwork: "sepolia",
   networks: {
     hardhat: {
       forking:{

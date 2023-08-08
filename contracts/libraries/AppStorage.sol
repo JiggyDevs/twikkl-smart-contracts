@@ -2,47 +2,6 @@
 
 pragma solidity ^0.8.0;
 
-struct ERC20AppStorage {
-
-    // Twikkle Token 
-    uint256  totalSupply;
-
-    string  name;
-
-    string  symbol;
-
-    uint8 decimals;
-
-    mapping(address => mapping(address => uint256)) allowances;
-
-    mapping(address => uint256) balances; 
-
-
-}
-
-struct ERC721AppStorage {
-
-    // Twikle NFT name
-    string private _name;
-
-    // Twikle symbol
-    string private _symbol;
-
-    // Mapping from token ID to owner address
-    mapping(uint256 => address) private _owners;
-
-
-    // Mapping owner address to token count
-    mapping(address => uint256) private _balances;
-
-    // Mapping from token ID to approved address
-    mapping(uint256 => address) private _tokenApprovals;
-
-    // Mapping from owner to operator approvals
-    mapping(address => mapping(address => bool)) private _operatorApprovals;
-}
-
-
 struct Content {
 
       string contentName;
