@@ -2,9 +2,12 @@
 
 pragma solidity ^0.8.17;
 
-import {AppStorage} from "../libraries/AppStorage.sol";
+import {AppStorage, VotersDetails, Content} from "../libraries/AppStorage.sol";
 import "../interfaces/IERC20.sol";
 import "../interfaces/IERC721.sol";
+
+//import the hardhat console
+import "hardhat/console.sol";
 
 
 contract VoteContentFacet  {

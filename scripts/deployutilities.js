@@ -12,6 +12,10 @@ async function main() {
   await twikklNFT.deployed();
 
   console.log("TwikklNFT deployed to:", twikklNFT.address);
+
+  console.log(twikklNFT);
+
+  
   
   //
   // ------ Deploy Token -------

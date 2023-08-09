@@ -32,7 +32,7 @@ contract MerkleTreeFacet is Ownable {
   /**
   * @notice Function with whitelist
   */
-  function whitelistFunc(bytes32[] calldata _merkleProof) external
+  function whitelistFunc(bytes32[] calldata _merkleProof) external view
   {
       require(verifyAddress(_merkleProof), "INVALID_PROOF");
 

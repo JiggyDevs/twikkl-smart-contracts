@@ -20,27 +20,27 @@ const INFURA_MAINNET_API_URL = process.env.INFURA_MAINNET_API_KEY_URL;
 
 module.exports = {
   solidity: "0.8.17",
-  defaultNetwork: "sepolia",
-  networks: {
-    hardhat: {
-      forking:{
-        url: INFURA_MAINNET_API_URL,
-      }
-    },
-    goerli: {
-      url: ALCHEMY_GOERLI_API_KEY_URL,
-      accounts: [ACCOUNT_PRIVATE_KEY],
-    },
-    mumbai: {
-      url: ALCHEMY_MUMBAI_API_KEY_URL,
-      accounts: [ACCOUNT_PRIVATE_KEY],
-    },
-    sepolia: {
-      url: ALCHEMY_SEPOLIA_API_KEY,
-      accounts: [ACCOUNT_PRIVATE_KEY],
-    }
-  },
-  etherscan: {
-    apiKey: "API_TOKEN"
-  }
+  // defaultNetwork: "sepolia",
+  // networks: {
+  //   hardhat: {
+  //     forking:{
+  //       url: INFURA_MAINNET_API_URL,
+  //     }
+  //   },
+  //   goerli: {
+  //     url: ALCHEMY_GOERLI_API_KEY_URL,
+  //     accounts: [ACCOUNT_PRIVATE_KEY],
+  //   },
+  //   mumbai: {
+  //     url: ALCHEMY_MUMBAI_API_KEY_URL,
+  //     accounts: [ACCOUNT_PRIVATE_KEY],
+  //   },
+  //   sepolia: {
+  //     url: ALCHEMY_SEPOLIA_API_KEY,
+  //     accounts: [ACCOUNT_PRIVATE_KEY],
+  //   }
+  // },
+  // etherscan: {
+  //   apiKey: "API_TOKEN"
+  // }
 };
