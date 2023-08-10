@@ -30,8 +30,7 @@ contract DiamondLoupeFacet is IDiamondLoupe, IERC165 {
             facets_[i].facetAddress = facetAddress_;
             facets_[i].functionSelectors = ds.facetFunctionSelectors[facetAddress_].functionSelectors;
         }
-    }
-
+    } 
     /// @notice Gets all the function selectors provided by a facet.
     /// @param _facet The facet address.
     /// @return facetFunctionSelectors_
