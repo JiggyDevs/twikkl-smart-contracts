@@ -51,6 +51,8 @@ struct VotersDetails {
       bool hasVoted;
 
       bool vote;
+
+      bool verified;
       
 }
 

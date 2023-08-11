@@ -13,7 +13,40 @@ import "hardhat/console.sol";
 contract VoteContentFacet  {
     AppStorage internal s;
 
+    VotersDetails internal v;
+
     event VoteCast(address indexed voter, bool vote);
+
+    function totalVoters() public view returns (uint256) {
+        return s._totalVoters;
+    }
+
+    function isVotingOn() public view returns (bool) {
+        return s._isVotingOn;
+    }
+
+    function totalFlaggedContent() public view returns (uint256) {
+        return s._totalFlaggedContent;
+    }
+
+    function addVoters(address voterAddress) public {
+        require(voterAddress != address(0), "Invalid address");
+
+        // Check if voter already exists
+        if ( s.Voters[voterAddress].verified == false ) {
+            // Create a new VotersDetails struct for the voter
+
+            VotersDetails storage newVotersDetails = s.Voters[voterAddress];
+
+            newVotersDetails.voterAddress = voterAddress;
+            newVotersDetails.hasVoted = false;
+            newVotersDetails.vote = false;
+            newVotersDetails.verified = true;
+            
+        }
+
+        s._totalVoters++;
+    }
 
     function getRandomVoters() public {
         require(s._totalVoters >= 3, "Not enough voters to select from");
