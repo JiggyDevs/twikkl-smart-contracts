@@ -25,12 +25,30 @@ contract VoteContentFacet  {
         return s._isVotingOn;
     }
 
+    function checkNFTAdress() public view returns (address) {
+        return s._nftAddress;
+    }
+
+    function checkTokenAdress() public view returns (address) {
+        return s._tokenAddress;
+    }
+
+    function setNFTAdress(address NFTaddress) public {
+        s._nftAddress = NFTaddress;
+    }
+
+    function setTokenAdress(address tokenAddress) public {
+        s._tokenAddress = tokenAddress;
+    }
+
     function totalFlaggedContent() public view returns (uint256) {
         return s._totalFlaggedContent;
     }
 
     function addVoters(address voterAddress) public {
         require(voterAddress != address(0), "Invalid address");
+
+        require(hasNFTAndERC20Token(voterAddress), "You must have the required NFT and ERC20 token to vote");
 
         // Check if voter already exists
         if ( s.Voters[voterAddress].verified == false ) {
@@ -44,6 +62,14 @@ contract VoteContentFacet  {
             newVotersDetails.verified = true;
             
         }
+
+        // Check if the voter is not already in the eligible voter array
+        for (uint256 i = 0; i < s.EligibleVoters.length; i++) {
+            require(s.EligibleVoters[i] != voterAddress, "Voter is already eligible");
+        }
+
+        // Add the voter to the array
+        s.EligibleVoters.push(voterAddress);
 
         s._totalVoters++;
     }
@@ -59,6 +85,18 @@ contract VoteContentFacet  {
             address selectedVoter = s.Voters[msg.sender].voterAddress;
             s.EligibleVoters.push(selectedVoter);
         }
+    }
+
+    function getContent(uint256 contentID) public view returns (Content memory) {
+        return s.ContentBank[contentID];
+    }
+
+    function startVoting() public returns (bool) {
+       return s._isVotingOn = true;
+    }
+
+    function stopVoting() public returns (bool) {
+       return s._isVotingOn = false;
     }
 
 
@@ -82,7 +120,7 @@ contract VoteContentFacet  {
 
         // check if voter has already voted
         VotersDetails memory voter = s.Voters[msg.sender];
-        require(!voter.hasVoted, "You have already voted");
+        require(voter.hasVoted == false, "You have already voted");
 
         //allow them cast a yes or no vote
         voter.hasVoted = true;
@@ -99,8 +137,9 @@ contract VoteContentFacet  {
 
         updateContent.isVotedOn = true;
 
-        // stop voting time
+        updateContent.totalVoteCount++;
 
+       
         // Stop voting time if all eligible voters have voted
         if (allVotersHaveVoted()) {
             s._isVotingOn = false;
@@ -131,14 +170,15 @@ contract VoteContentFacet  {
     // check if the given address has the required NFT and ERC20 token in their wallet
     function hasNFTAndERC20Token(address voter) internal view returns (bool) {
 
-    uint256 tokenId = 20;
     // Check if the voter owns the NFT
-    bool hasNFT = IERC721(s._nftAddress).ownerOf(tokenId) == voter; 
+    bool hasNFT = IERC721(s._nftAddress).balanceOf(voter) > 0; 
 
     // Check if the voter has the ERC20 token balance
     uint256 erc20Balance = IERC20(s._tokenAddress).balanceOf(voter); 
 
     return hasNFT && (erc20Balance > 0);
+
+    // return (erc20Balance > 0);
     }
 
 

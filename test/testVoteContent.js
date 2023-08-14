@@ -1,32 +1,47 @@
 const { loadFixture, time } = require("@nomicfoundation/hardhat-network-helpers");
-const  { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-const helpers = require("@nomicfoundation/hardhat-network-helpers");
 
 describe ("VoteContractFacet", function () {
   async function deployTokenContract() {
 
-    const [owner, user1, user2, user3, user4, protocol] = await ethers.getSigners();
+    const contentId = 1;
+
+    const [owner, voter1, voter2, voter3] = await ethers.getSigners();
    
        // deploy Twikkl token
        const TwikklToken = await ethers.getContractFactory("TwikklToken");
        const twikklToken = await TwikklToken.deploy();
        await twikklToken.deployed();
    
-       // Mint Twikkl token to user1
-       await twikklToken.withdrawFromContract(user1.address, BigInt(1e23));
+       // Mint Twikkl token to voter1
+       await twikklToken.withdrawFromContract(voter1.address, BigInt(1));
+
+       // Mint Twikkl token to voter2
+       await twikklToken.withdrawFromContract(voter2.address, BigInt(1));
+
+       // Mint Twikkl token to voter3
+       await twikklToken.withdrawFromContract(voter3.address, BigInt(1));
+
    
        // deploy TwikklNFT
        const TwikklNFT = await ethers.getContractFactory("TwikklNFT");
        const twikklNFT = await TwikklNFT.deploy();
        await twikklNFT.deployed();
    
-       // Mint TwikklNFT token to user1
+       // Mint TwikklNFT 
+
        // Get the NFT Metadata IPFS URL
        const tokenUri = "https://gateway.pinata.cloud/ipfs/QmZKMnmVLre9c9cxKCd4DXZzv6etAtQQrryDGMKtsRaqNR"
    
-       await twikklNFT.mintNFT(user1.address, tokenUri);
+       // Mint TwikklNFT token to voter1
+       await twikklNFT.mintNFT(voter1.address, tokenUri);
+
+       // Mint TwikklNFT token to voter2
+       await twikklNFT.mintNFT(voter2.address, tokenUri);
+
+       // Mint TwikklNFT token to voter3
+       await twikklNFT.mintNFT(voter3.address, tokenUri);
    
        // deploy Vote Content Facet Bank
        const VoteContentFacet = await ethers.getContractFactory("VoteContentFacet");
@@ -34,49 +49,88 @@ describe ("VoteContractFacet", function () {
    
        await voteContent.deployed();
    
-       // Call the vote function
-      //  await voteContent.vote(
-      //    "yes",
-      //    "100000"
-      //  );
-   
-       return { owner, user1, user2, user3, user4, twikklNFT, twikklToken, voteContent, protocol };
+       return { 
+        owner, 
+        voter1, 
+        voter2, 
+        voter3, 
+        twikklNFT, 
+        twikklToken, 
+        voteContent, 
+        contentId,
+      };
     
   }
-  
-  describe("Test that vote function works", function() {
-    it ("Ensure that user can vote", async function () {
-      const {user1, voteContent } = await loadFixture
+
+  describe("Commence Content Voting", function() {
+    it ("Check if twikklNFT & twikklToken exists", async function() {
+
+      const {twikklNFT, twikklToken } = await loadFixture
       (deployTokenContract);
 
-      console.log("user1", user1.address);
+      console.log("NFT", twikklNFT.address);
 
-      const vote = await voteContent.addVoters(user1.address);
+      console.log("Token", twikklToken.address)
 
-      // console.log("voters",vote)
+    })
+
+    it ("Ensure that voting has started", async function() {
+
+      const { voteContent } = await loadFixture
+      (deployTokenContract);
+      
+      await voteContent.startVoting();
+
+      expect(await voteContent.isVotingOn()).to.equal(true);
+
+    })
+
+    it ("Check current no of voters", async function () {
+      const { voteContent } = await loadFixture
+      (deployTokenContract);
+
       const noOfVoters = await voteContent.totalVoters();
       
-      // console.log("noOfVoters", noOfVoters);
-      //  let noOfVoters = await voteContent._totalVoters;
-      // expect(noOfVoters).to.equal(1);
+      console.log("noOfVoters", noOfVoters);
     });
+
+    it ("Test to ensure voters vote", async function () {
+      const {voter1, voter2,
+      voter3, 
+      voteContent, contentId, twikklNFT, twikklToken} = await loadFixture
+      (deployTokenContract);
+
+      await voteContent.startVoting();
+      
+      await voteContent.setNFTAdress(twikklNFT.address);
+
+      await voteContent.setTokenAdress(twikklToken.address)
+
+      await voteContent.addVoters(voter1.address);
+
+      await voteContent.addVoters(voter2.address);
+
+      await voteContent.addVoters(voter3.address);
+
+      await voteContent.connect(voter1).vote(true, contentId);
+
+      await voteContent.connect(voter2).vote(true, contentId);
+
+      
+      await voteContent.connect(voter3).vote(true, contentId);
+
+      const noOfVoters = await voteContent.totalVoters();
+      
+      console.log("New number Of Voters", noOfVoters);
+
+      
+      const content = await voteContent.getContent(contentId)
+
+      console.log("content", content);
+
+    });
+
+    
   })
 
-  // describe("Test that Voting can be done ", function() {
-  //   it ("Ensure that isVotingOn is false before voting can be cast", async function () {
-  //     const {user1, voteContent } = await loadFixture
-  //     (deployTokenContract);
-
-  //     console.log(user1.address);
-
-  //     const checker = await voteContent.addVoters(user1.address);
-
-  //     const noOfVoters = await voteContent.totalVoters;
-       
-  //     console.log("checker", checker);
-  //     console.log("noOfVoters", noOfVoters);
-  //     //  let noOfVoters = await voteContent._totalVoters;
-  //     // expect(noOfVoters).to.equal(1);
-  //   });
-  // })
 }) 
