@@ -7,7 +7,7 @@ describe ("VoteContractFacet", function () {
 
     const contentId = 1;
 
-    const [owner, voter1, voter2, voter3] = await ethers.getSigners();
+    const [owner, voter1, voter2, voter3, voter4] = await ethers.getSigners();
    
        // deploy Twikkl token
        const TwikklToken = await ethers.getContractFactory("TwikklToken");
@@ -96,7 +96,7 @@ describe ("VoteContractFacet", function () {
 
     it ("Test to ensure voters vote", async function () {
       const {voter1, voter2,
-      voter3, 
+      voter3, voter4, 
       voteContent, contentId, twikklNFT, twikklToken} = await loadFixture
       (deployTokenContract);
 
@@ -115,9 +115,10 @@ describe ("VoteContractFacet", function () {
       await voteContent.connect(voter1).vote(true, contentId);
 
       await voteContent.connect(voter2).vote(true, contentId);
-
       
       await voteContent.connect(voter3).vote(true, contentId);
+
+      // await voteContent.connect(voter4).vote(true, contentId);
 
       const noOfVoters = await voteContent.totalVoters();
       
