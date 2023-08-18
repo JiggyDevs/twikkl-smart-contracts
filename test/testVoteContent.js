@@ -1,4 +1,4 @@
-const { loadFixture, time } = require("@nomicfoundation/hardhat-network-helpers");
+const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
@@ -122,12 +122,12 @@ describe ("VoteContractFacet", function () {
 
       const noOfVoters = await voteContent.totalVoters();
       
-      console.log("New number Of Voters", noOfVoters);
+      // console.log("New number Of Voters", noOfVoters);
 
       
       const content = await voteContent.getContent(contentId)
 
-      console.log("content", content);
+      // console.log("content", content);
 
     });
 

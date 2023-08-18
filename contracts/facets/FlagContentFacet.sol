@@ -4,49 +4,33 @@ pragma solidity ^0.8.17;
 
 import {AppStorage, flaggedContent} from "../libraries/AppStorage.sol";
 
-import "./MerkleTreeFacet.sol";
-
-contract FlagContentFacet  {
-    
+contract FlagContentFacet {
     AppStorage internal s;
 
-    MerkleTreeFacet private merkleTreeFacet;
+    mapping(uint256 => flaggedContent) flaggedContents;
 
-    // sets the address of the merkleTreeFacet
-    // function initialize(address merkleTreeFacetAddress) external {
-    // merkleTreeFacet = MerkleTreeFacet(merkleTreeFacetAddress);
-    // }
+    function getFlaggedContent(
+        uint256 contentID
+    ) public view returns (flaggedContent memory) {
+        return s.flaggedContents[contentID];
+    }
 
     // The function to flag content.
     function FlagContent(uint256 _contentID) public {
+        require(_contentID != 0, "Flag valid content!");
 
-    // Check if the user has the correct permissions to flag content(merkle tree).
-    // bytes32[] calldata merkleProof = new bytes32[](3);
-    // merkleProof[0] = keccak256(msg.sender);
-    // merkleProof[1] = keccak256(merkleTreeFacet.merkleRoot);
-    // merkleProof[2] = keccak256(merkleTreeFacet.merkleRoot);
+        require(msg.sender != address(0), "No permission to flag content");
 
-    // To-Fix: complier issue - verifyAddress not found
-    // require(merkleTreeFacet.verifyAddress(merkleProof), "No permission to flag content.");
+        // Create a new flaggedContent struct and store it in the mapping.
 
+        flaggedContent memory newFlaggedContent = flaggedContent({
+            contentID: _contentID,
+            flaggedTimestamp: block.timestamp,
+            flaggedBy: msg.sender
+        });
 
-    // Create a new flaggedContent struct and store it in the mapping.
+        s.flaggedContents[_contentID] = newFlaggedContent;
 
-    flaggedContent memory newFlaggedContent = flaggedContent({
-      
-      contentID : _contentID,
-       
-      flaggedTimestamp : block.timestamp,
-
-      flaggedBy : msg.sender
-
-    
-    });
-
-    s.flaggedContents[_contentID] = newFlaggedContent;
-
-    s._totalFlaggedContent ++;
-
-  }
-    
+        s._totalFlaggedContent++;
+    }
 }

@@ -13,6 +13,13 @@ contract MerkleTreeFacet is Ownable {
   bytes32 public merkleRoot;
 
   /**
+  * @notice Get merkle root hash
+  */
+  function getMerkleRoot() external view returns (bytes32)  {
+     return merkleRoot;
+  }
+
+  /**
   * @notice Change merkle root hash
   */
   function setMerkleRoot(bytes32 merkleRootHash) external onlyOwner
@@ -23,10 +30,10 @@ contract MerkleTreeFacet is Ownable {
   /**
   * @notice Verify merkle proof of the address
   */
-  function verifyAddress(bytes32[] calldata _merkleProof) private 
+  function verifyAddress(bytes32[] calldata _merkleProof) public 
   view returns (bool) {
       bytes32 leaf = keccak256(abi.encodePacked(msg.sender));
-      return MerkleProof.verify(_merkleProof, merkleRoot, leaf);
+      return MerkleProof.verifyCalldata(_merkleProof, merkleRoot, leaf);
   }
 
   /**
