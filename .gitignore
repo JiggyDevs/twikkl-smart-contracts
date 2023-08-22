@@ -3,3 +3,7 @@ out
 node_modules
 cache
 .env
+
+# hardhat-tenderly plugin
+deployments
+EOF

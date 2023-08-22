@@ -91,7 +91,7 @@ describe ("VoteContractFacet", function () {
 
       const noOfVoters = await voteContent.totalVoters();
       
-      console.log("noOfVoters", noOfVoters);
+      // console.log("noOfVoters", noOfVoters);
     });
 
     it ("Test to ensure voters vote", async function () {

@@ -10,8 +10,11 @@ pragma solidity ^0.8.0;
 
 import {LibDiamond} from "./libraries/LibDiamond.sol";
 import {IDiamondCut} from "./interfaces/IDiamondCut.sol";
+import {AppStorage} from "./libraries/AppStorage.sol";
 
 contract Diamond {
+
+    AppStorage internal s;
 
     constructor(address _contractOwner, address _diamondCutFacet ) payable {
         LibDiamond.setContractOwner(_contractOwner);
@@ -26,6 +29,8 @@ contract Diamond {
             functionSelectors: functionSelectors
         });
         LibDiamond.diamondCut(cut, address(0), "");
+
+        s._isVotingOn = false;
     }
 
     // Find facet for function that is called and execute the

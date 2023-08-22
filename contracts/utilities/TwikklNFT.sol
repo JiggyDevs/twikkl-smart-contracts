@@ -9,17 +9,25 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
- * @dev Implementation of https://eips.ethereum.org/EIPS/eip-721[ERC721] Non-Fungible Token Standard, including
- * the Metadata extension, but not including the Enumerable extension, which is available separately as
- * {ERC721Enumerable}.
+ * @title TwikklNFT
+ * @dev A smart contract implementing the ERC721 Non-Fungible Token Standard with URI storage.
  */
 
 contract TwikklNFT is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
+    /**
+     * @dev Constructor to initialize the ERC721 token.
+     */
     constructor() ERC721("JiggyNFT", "JGYNFT") {}
 
+    /**
+     * @notice Mint a new NFT and assign it to the recipient address.
+     * @param recipient The address to which the newly minted NFT will be assigned.
+     * @param tokenURI The metadata URI for the NFT.
+     * @return The ID of the newly minted NFT.
+     */
     function mintNFT(address recipient, string memory tokenURI)
         public
         onlyOwner

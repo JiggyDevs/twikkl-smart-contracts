@@ -3,49 +3,98 @@
 pragma solidity ^0.8.17;
 
 import {AppStorage, VotersDetails, Content} from "../libraries/AppStorage.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "../interfaces/IERC20.sol";
 import "../interfaces/IERC721.sol";
 
 //import the hardhat console
 import "hardhat/console.sol";
 
+/**
+ * @title VoteContentFacet
+ * @dev A smart contract for content voting using NFT and ERC20 token requirements.
+ */
 
-contract VoteContentFacet  {
+contract VoteContentFacet is Ownable {
     AppStorage internal s;
 
     VotersDetails internal v;
 
     event VoteCast(address indexed voter, bool vote);
 
+    /**
+     * @dev Get the total number of voters.
+     */
     function totalVoters() public view returns (uint256) {
         return s._totalVoters;
     }
 
+    /**
+     * @dev Check if voting is currently active.
+     */
     function isVotingOn() public view returns (bool) {
         return s._isVotingOn;
     }
 
+       /**
+     * @dev Start the voting process. Only the owner can call this function.
+     * @return True if voting is started.
+     */
+    function startVoting() public onlyOwner returns (bool) {
+       return s._isVotingOn = true;
+    }
+
+    /**
+     * @dev Stop the voting process. Only the owner can call this function.
+     * @return True if voting is stopped.
+     */
+    function stopVoting() public onlyOwner returns (bool) {
+       return s._isVotingOn = false;
+    }
+
+
+    /**
+     * @dev Get the NFT contract address.
+     */
     function checkNFTAdress() public view returns (address) {
         return s._nftAddress;
     }
 
+    /**
+     * @dev Get the ERC20 token contract address.
+     */
     function checkTokenAdress() public view returns (address) {
         return s._tokenAddress;
     }
 
-    function setNFTAdress(address NFTaddress) public {
+    /**
+     * @dev Set the NFT contract address. Only the owner can call this function.
+     * @param NFTaddress The address of the NFT contract.
+     */
+    function setNFTAdress(address NFTaddress) public onlyOwner {
         s._nftAddress = NFTaddress;
     }
 
-    function setTokenAdress(address tokenAddress) public {
+    /**
+     * @dev Set the ERC20 token contract address. Only the owner can call this function.
+     * @param tokenAddress The address of the ERC20 token contract.
+     */
+    function setTokenAdress(address tokenAddress) public onlyOwner {
         s._tokenAddress = tokenAddress;
     }
 
+    /**
+     * @dev Get the total number of flagged content.
+     */
     function totalFlaggedContent() public view returns (uint256) {
         return s._totalFlaggedContent;
     }
 
-    function addVoters(address voterAddress) public {
+    /**
+     * @dev Add a voter to the eligible voters list. Only the owner can call this function.
+     * @param voterAddress The address of the voter.
+     */
+    function addVoters(address voterAddress) public onlyOwner {
         require(voterAddress != address(0), "Invalid address");
 
         require(hasNFTAndERC20Token(voterAddress), "You must have the required NFT and ERC20 token to vote");
@@ -74,7 +123,10 @@ contract VoteContentFacet  {
         s._totalVoters++;
     }
 
-    function getRandomVoters() public {
+    /**
+     * @dev Get 3 random voters and add them to the eligible voters list. Only the owner can call this function.
+     */
+    function getRandomVoters() public onlyOwner {
         require(s._totalVoters >= 3, "Not enough voters to select from");
 
         uint256[] memory randomIndices = _generateRandomIndices(3, s._totalVoters);
@@ -86,30 +138,32 @@ contract VoteContentFacet  {
             s.EligibleVoters.push(selectedVoter);
         }
     }
-
+  
+    /**
+     * @dev Get content details by content ID.
+     * @param contentID The ID of the content.
+     * @return Content details.
+     */
     function getContent(uint256 contentID) public view returns (Content memory) {
         return s.ContentBank[contentID];
     }
 
-    function startVoting() public returns (bool) {
-       return s._isVotingOn = true;
-    }
-
-    function stopVoting() public returns (bool) {
-       return s._isVotingOn = false;
-    }
-
-
+ 
+    /**
+     * @dev Cast a vote for a content.
+     * @param voteValue The vote value (true for yes, false for no).
+     * @param contentID The ID of the content.
+     */    
     function vote(bool voteValue, uint256 contentID) public {
 
         // checks if voting time is on, if not, don't allow to vote
-        require(s._isVotingOn, "Wait for voting time please!");
+        require(!s._isVotingOn, "Wait for voting time please!");
 
         // if voting time is off, start voting 
-        if (s._votingTime > block.timestamp) {
-            s._isVotingOn = true;
-           s._votingTime = block.timestamp;
-        }
+        // if (s._votingTime > block.timestamp) {
+        //     s._isVotingOn = true;
+        //     s._votingTime = block.timestamp;
+        // }
 
         // checks that the voters are in eligible voters array
         require(isEligibleVoter(msg.sender), "You are not eligible to vote");
@@ -154,6 +208,11 @@ contract VoteContentFacet  {
         emit VoteCast(msg.sender, voteValue);
     }
 
+    /**
+     * @dev Check if a voter is eligible based on the eligible voters list.
+     * @param voter The address of the voter.
+     * @return True if the voter is eligible.
+     */
     function isEligibleVoter(address voter) internal view returns (bool) {
     // Iterate through the eligible voters array to check if the given address is present
         for (uint256 i = 0; i < s.EligibleVoters.length; i++) {
@@ -167,7 +226,12 @@ contract VoteContentFacet  {
         return false;
     }
 
-    // check if the given address has the required NFT and ERC20 token in their wallet
+    /**
+     * @dev Check if a voter has the required NFT and ERC20 token.
+     * @param voter The address of the voter.
+     * @return True if the voter has the required NFT
+     * and ERC20 token.
+     */
     function hasNFTAndERC20Token(address voter) internal view returns (bool) {
 
     // Check if the voter owns the NFT
@@ -178,11 +242,15 @@ contract VoteContentFacet  {
 
     return hasNFT && (erc20Balance > 0);
 
-    // return (erc20Balance > 0);
     }
 
 
-
+ 
+    /**
+     * @dev Gets the voter index 
+     * @param voter The address of the voter
+     * @return A the index of voter
+     */
     function getVoterIndex(address voter) internal view returns (uint256) {
         // Implement the logic to retrieve the index of the given voter address
         // from the eligibleVoters array
@@ -194,6 +262,10 @@ contract VoteContentFacet  {
         revert("Voter not found");
     }
 
+    /**
+     * @dev Check if all voters have voted.
+     * @return A bool
+     */
     function allVotersHaveVoted() internal view returns (bool) {
         // Iterate through the eligible voters array and check their voting status
         for (uint256 i = 0; i < s.EligibleVoters.length; i++) {
@@ -208,6 +280,12 @@ contract VoteContentFacet  {
         return true;
     }
 
+    /**
+     * @dev Generate random indices for selecting random voters.
+     * @param count The number of random indices to generate.
+     * @param max The maximum value of indices.
+     * @return An array of random indices.
+     */
     function _generateRandomIndices(uint256 count, uint256 max) internal view returns (uint256[] memory) {
     require(count <= max, "Count must be less than or equal to the maximum");
 
@@ -229,6 +307,12 @@ contract VoteContentFacet  {
     
     }
 
+    /**
+     * @dev Swap elements in an array.
+     * @param array The array in which to swap elements.
+     * @param index1 The index of the first element to swap.
+     * @param index2 The index of the second element to swap.
+     */
     function _swap(uint256[] memory array, uint256 index1, uint256 index2) internal pure {
         uint256 temp = array[index1];
         array[index1] = array[index2];
