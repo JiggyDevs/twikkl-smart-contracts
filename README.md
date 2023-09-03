@@ -17,21 +17,21 @@ TwikklToken deployed to: 0x50886AB774220706744394F351ee468952eC6112
 
 TwikklNFT deployed to: 0x5fb238aDe346aD2e0943bA5F793d94575F301603
 
-DiamondCutFacet deployed: 0xcf4CD5d6B6c7820b6aEE616E86EE06CCdBbBd041
+DiamondCutFacet deployed: 0xcf4CD5d6B6c7820b6aEE616E86EE06CCdBbBd041<br>
 
-Diamond deployed: 0x67b14a18AE7418B934510A09BBc67547ae538c17
+Diamond deployed: 0x67b14a18AE7418B934510A09BBc67547ae538c17<br>
 
-DiamondInit deployed: 0x6737CaAf13D3b1967613c7456025B9a40Fab395c
+DiamondInit deployed: 0x6737CaAf13D3b1967613c7456025B9a40Fab395c<br>
 
-DiamondLoupeFacet deployed: 0x72733f8529D26AAd7ef58f32FA8D075A78aBE1F4
+DiamondLoupeFacet deployed: 0x72733f8529D26AAd7ef58f32FA8D075A78aBE1F4<br>
 
-OwnershipFacet deployed: 0xE73243df409723360903Df7389D1927806c5Cc55
+OwnershipFacet deployed: 0xE73243df409723360903Df7389D1927806c5Cc55<br>
 
-VoteContentFacet deployed: 0xa15c9BB409F780379A57d3a9e9a74e6B348D5e19
+VoteContentFacet deployed: 0xa15c9BB409F780379A57d3a9e9a74e6B348D5e19<br>
 
-FlagContentFacet deployed: 0xd143Ee48FB75CC1c8D5fE2b07375Aa6aeC34D2ea
+FlagContentFacet deployed: 0xd143Ee48FB75CC1c8D5fE2b07375Aa6aeC34D2ea<br>
 
-MerkleTreeFacet deployed: 0x549dC79b8cbd24DFd0aEB7dc030DdCA4494D73EB
+MerkleTreeFacet deployed: 0x549dC79b8cbd24DFd0aEB7dc030DdCA4494D73EB<br>
 
 
 ## Resources
