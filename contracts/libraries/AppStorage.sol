@@ -2,6 +2,8 @@
 
 pragma solidity ^0.8.0;
 
+import {LibDiamond} from "../libraries/LibDiamond.sol";
+
 struct Content {
 
       string contentName;
@@ -85,4 +87,12 @@ mapping (address => VotersDetails) Voters;
 
 mapping(uint256 => flaggedContent) flaggedContents;
 
+}
+
+contract Modifiers {
+    modifier onlyOwner() {
+        address owner = LibDiamond.contractOwner();
+        require(owner == msg.sender, "Only Owner can call this function");
+        _;
+    }  
 }

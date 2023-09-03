@@ -2,6 +2,7 @@
 
 pragma solidity ^0.8.17;
 
+import {Modifiers} from "../libraries/AppStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
@@ -10,7 +11,7 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
  * @dev A smart contract for managing a Merkle tree-based whitelist.
  */
 
-contract MerkleTreeFacet is Ownable {
+contract MerkleTreeFacet is Modifiers {
 
   /**
   * @notice Merkle root hash for whitelist addresses

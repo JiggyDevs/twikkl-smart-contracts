@@ -2,20 +2,19 @@
 
 pragma solidity ^0.8.17;
 
-import {AppStorage, VotersDetails, Content} from "../libraries/AppStorage.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import {Modifiers, AppStorage, VotersDetails, Content} from "../libraries/AppStorage.sol";
 import "../interfaces/IERC20.sol";
 import "../interfaces/IERC721.sol";
 
 //import the hardhat console
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
 /**
  * @title VoteContentFacet
  * @dev A smart contract for content voting using NFT and ERC20 token requirements.
  */
 
-contract VoteContentFacet is Ownable {
+contract VoteContentFacet is Modifiers {
     AppStorage internal s;
 
     VotersDetails internal v;

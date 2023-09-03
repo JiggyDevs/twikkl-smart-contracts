@@ -30,7 +30,7 @@ contract Diamond {
         });
         LibDiamond.diamondCut(cut, address(0), "");
 
-        s._isVotingOn = false;
+        // s._isVotingOn = false;
     }
 
     // Find facet for function that is called and execute the

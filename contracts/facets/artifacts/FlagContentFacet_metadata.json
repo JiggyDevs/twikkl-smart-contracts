@@ -1,0 +1,126 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_contentID",
+						"type": "uint256"
+					}
+				],
+				"name": "FlagContent",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "contentID",
+						"type": "uint256"
+					}
+				],
+				"name": "getFlaggedContent",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "contentID",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "flaggedTimestamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "flaggedBy",
+								"type": "address"
+							}
+						],
+						"internalType": "struct flaggedContent",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "A smart contract for flagging content and storing flagged content details.",
+			"kind": "dev",
+			"methods": {
+				"FlagContent(uint256)": {
+					"params": {
+						"_contentID": "The ID of the content to be flagged."
+					}
+				},
+				"getFlaggedContent(uint256)": {
+					"params": {
+						"contentID": "The ID of the content to retrieve details for."
+					},
+					"returns": {
+						"_0": "The details of the flagged content."
+					}
+				}
+			},
+			"title": "FlagContentFacet",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"FlagContent(uint256)": {
+					"notice": "Flag a content by its ID."
+				},
+				"getFlaggedContent(uint256)": {
+					"notice": "Get details of a flagged content by content ID."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/facets/FlagContentFacet.sol": "FlagContentFacet"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/facets/FlagContentFacet.sol": {
+			"keccak256": "0x3991ee5df9800c2db04726ec7900d297139c4f495f6f1dc0f620ea33fe1ac518",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7dd14b8a709b4d43e3c2dfd91233c0cd2959ab2dd1fb72630fb2d03f8ae47e07",
+				"dweb:/ipfs/QmdAFZAhhpTa7gJQDaxCizAzEC6frTJNQgSq73qZaGpjqE"
+			]
+		},
+		"contracts/libraries/AppStorage.sol": {
+			"keccak256": "0x6585cb7d5aec3356f29b61f017570c30087c803586baa3d5cf34469c71095489",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5e327be8058a93cc43f03f3961e65d015307919857f10d9ba8b9bd6b08a24dc6",
+				"dweb:/ipfs/QmYhmYGJYzvQxupjnuFNA4VCWVfdVna3ArjEXhTemWhkvS"
+			]
+		}
+	},
+	"version": 1
+}

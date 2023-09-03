@@ -1,0 +1,495 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "voter",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "vote",
+						"type": "bool"
+					}
+				],
+				"name": "VoteCast",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "voterAddress",
+						"type": "address"
+					}
+				],
+				"name": "addVoters",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkNFTAdress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkTokenAdress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "contentID",
+						"type": "uint256"
+					}
+				],
+				"name": "getContent",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "contentName",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "contentCreator",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "contentID",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "flagged",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "flaggedTimestamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "flaggedBy",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "reasonForFlagging",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "contentDescription",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "isVotedOn",
+								"type": "bool"
+							},
+							{
+								"internalType": "address[]",
+								"name": "voters",
+								"type": "address[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalVoteCount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "flaggedVotes",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "yesVotes",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "noVotes",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Content",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getRandomVoters",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "isVotingOn",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "NFTaddress",
+						"type": "address"
+					}
+				],
+				"name": "setNFTAdress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "setTokenAdress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "startVoting",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stopVoting",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalFlaggedContent",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalVoters",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bool",
+						"name": "voteValue",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "contentID",
+						"type": "uint256"
+					}
+				],
+				"name": "vote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "A smart contract for content voting using NFT and ERC20 token requirements.",
+			"kind": "dev",
+			"methods": {
+				"addVoters(address)": {
+					"details": "Add a voter to the eligible voters list. Only the owner can call this function.",
+					"params": {
+						"voterAddress": "The address of the voter."
+					}
+				},
+				"checkNFTAdress()": {
+					"details": "Get the NFT contract address."
+				},
+				"checkTokenAdress()": {
+					"details": "Get the ERC20 token contract address."
+				},
+				"getContent(uint256)": {
+					"details": "Get content details by content ID.",
+					"params": {
+						"contentID": "The ID of the content."
+					},
+					"returns": {
+						"_0": "Content details."
+					}
+				},
+				"getRandomVoters()": {
+					"details": "Get 3 random voters and add them to the eligible voters list. Only the owner can call this function."
+				},
+				"isVotingOn()": {
+					"details": "Check if voting is currently active."
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"setNFTAdress(address)": {
+					"details": "Set the NFT contract address. Only the owner can call this function.",
+					"params": {
+						"NFTaddress": "The address of the NFT contract."
+					}
+				},
+				"setTokenAdress(address)": {
+					"details": "Set the ERC20 token contract address. Only the owner can call this function.",
+					"params": {
+						"tokenAddress": "The address of the ERC20 token contract."
+					}
+				},
+				"startVoting()": {
+					"details": "Start the voting process. Only the owner can call this function.",
+					"returns": {
+						"_0": "True if voting is started."
+					}
+				},
+				"stopVoting()": {
+					"details": "Stop the voting process. Only the owner can call this function.",
+					"returns": {
+						"_0": "True if voting is stopped."
+					}
+				},
+				"totalFlaggedContent()": {
+					"details": "Get the total number of flagged content."
+				},
+				"totalVoters()": {
+					"details": "Get the total number of voters."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				},
+				"vote(bool,uint256)": {
+					"details": "Cast a vote for a content.",
+					"params": {
+						"contentID": "The ID of the content.",
+						"voteValue": "The vote value (true for yes, false for no)."
+					}
+				}
+			},
+			"title": "VoteContentFacet",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/facets/VoteContentFacet.sol": "VoteContentFacet"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xba43b97fba0d32eb4254f6a5a297b39a19a247082a02d6e69349e071e2946218",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fc980984badf3984b6303b377711220e067722bbd6a135b24669ff5069ef9f32",
+				"dweb:/ipfs/QmPHXMSXj99XjSVM21YsY6aNtLLjLVXDbyN76J5HQYvvrz"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"contracts/facets/VoteContentFacet.sol": {
+			"keccak256": "0x33131b868daa74b4432b0fb100c5f4785e97f4eff3d81402d87121c7d73399e6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7943a2fa9b661b1e83cda49d51541b4480657689925a97b9271d33692fced6db",
+				"dweb:/ipfs/QmXPG4ncdodhJjDUJ6NwVPMgr1hxUbgGLignXvXQqQZzA2"
+			]
+		},
+		"contracts/interfaces/IERC165.sol": {
+			"keccak256": "0x2deeed007d7ea76735bf06eefa327e2a2a37c3b2690619d57a91401f3382300b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0cc460b71756fdf34ca9d03cc3252e91958ef816b1792264028d28ce91d5ef00",
+				"dweb:/ipfs/QmRV2hzDYJj6VWgTCJKjbQwEpcyzXjojR7QZGhf1KCiUCN"
+			]
+		},
+		"contracts/interfaces/IERC20.sol": {
+			"keccak256": "0x80946d8b285de8b6ddf9eff1c45fda1618fddfcff12d4d1187f902b08cb4c9b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://61d2155bde1c4234769075219d3e86d2a445aeab4575daa4df1a7d4817f8e2ea",
+				"dweb:/ipfs/Qma226L3JXKF62aeVpsWALs1PqJ2AaEEZ1EZTE3xosxksz"
+			]
+		},
+		"contracts/interfaces/IERC721.sol": {
+			"keccak256": "0x0de925d41b9062aab88e74324feee131b5fdbb9be7825b0b4fe31f0b115b446f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://961d6e8fb3a570367f8fc5f3187d49831acb3371427d7bdcff7cff6cd1a77424",
+				"dweb:/ipfs/QmRk33PXDsjSZ8v3F5bBA5Q4G7NMb7ihGvRR4ztcqSok67"
+			]
+		},
+		"contracts/libraries/AppStorage.sol": {
+			"keccak256": "0x6585cb7d5aec3356f29b61f017570c30087c803586baa3d5cf34469c71095489",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5e327be8058a93cc43f03f3961e65d015307919857f10d9ba8b9bd6b08a24dc6",
+				"dweb:/ipfs/QmYhmYGJYzvQxupjnuFNA4VCWVfdVna3ArjEXhTemWhkvS"
+			]
+		},
+		"hardhat/console.sol": {
+			"keccak256": "0xfb9a1c05ce82a728e108b58b71a09f13d9586fc70555e82d190e9b2f5a6183af",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://99a82d0154a830eab2627cc36e6638b1eeb6766f408575eccb4efbd4e8bde1d0",
+				"dweb:/ipfs/QmZztP46dzfy43QtSqnP2jnhZhtQxjFqhiBMz56b8qC5Ty"
+			]
+		}
+	},
+	"version": 1
+}

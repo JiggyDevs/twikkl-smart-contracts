@@ -45,10 +45,6 @@ module.exports = {
       gasLimit: 500000000,
     }
   },
-  tenderly: {
-    project: 'jig',
-    username: 'emmaglorypraise'
-  },
   etherscan: {
     apiKey: "API_TOKEN"
   }

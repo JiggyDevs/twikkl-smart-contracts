@@ -10,20 +10,28 @@ Twikkle Discord: https://discord.gg/dAxGUfss
 
 
 ## Deployed Contract Addresses:
-Twikkle were born on the Polygon sidechain. Below are the deployed Diamond addresses:
 
+Twikkle smart contract was deployed on the Sepolia blockchain. Below are the deployed Diamond addresses:
 
-Twikkle Address (FlagContent contract and storage): 
+TwikklToken deployed to: 0x50886AB774220706744394F351ee468952eC6112
 
-Twikkle Address (VoteContent contract):  
+TwikklNFT deployed to: 0x5fb238aDe346aD2e0943bA5F793d94575F301603
 
-TwiklToken Address: 0x74efcAe1D5659c25717B4A5924152E7358F1f5db
+DiamondCutFacet deployed: 0xcf4CD5d6B6c7820b6aEE616E86EE06CCdBbBd041
+Diamond deployed: 0x67b14a18AE7418B934510A09BBc67547ae538c17
+DiamondInit deployed: 0x6737CaAf13D3b1967613c7456025B9a40Fab395c
+
+DiamondLoupeFacet deployed: 0x72733f8529D26AAd7ef58f32FA8D075A78aBE1F4
+OwnershipFacet deployed: 0xE73243df409723360903Df7389D1927806c5Cc55
+VoteContentFacet deployed: 0xa15c9BB409F780379A57d3a9e9a74e6B348D5e19
+FlagContentFacet deployed: 0xd143Ee48FB75CC1c8D5fE2b07375Aa6aeC34D2ea
+MerkleTreeFacet deployed: 0x549dC79b8cbd24DFd0aEB7dc030DdCA4494D73EB
 
 
 ## Resources
 Official docs: Coming soon!
 
-Louper Dev Diamond Explorer: Coming soon!
+Louper Dev Diamond Explorer: https://louper.dev/diamond/0x67b14a18AE7418B934510A09BBc67547ae538c17?network=sepolia
 
 Official Subgraph: Coming soon!
 
