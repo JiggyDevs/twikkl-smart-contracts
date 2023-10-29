@@ -1,9 +1,12 @@
 const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+require("dotenv").config({ path: ".env" });
 
 describe ("VoteContractFacet", function () {
   async function deployTokenContract() {
+
+    const TOKENURI = process.env.TOKENURI
 
     const contentId = 1;
 
@@ -32,8 +35,7 @@ describe ("VoteContractFacet", function () {
        // Mint TwikklNFT 
 
        // Get the NFT Metadata IPFS URL
-       const tokenUri = "https://gateway.pinata.cloud/ipfs/QmZKMnmVLre9c9cxKCd4DXZzv6etAtQQrryDGMKtsRaqNR"
-   
+       const tokenUri = `https://gateway.pinata.cloud/ipfs/${TOKENURI}`   
        // Mint TwikklNFT token to voter1
        await twikklNFT.mintNFT(voter1.address, tokenUri);
 

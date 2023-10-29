@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config({ path: ".env" });
 const ethers = require('ethers');
 
 // Get Alchemy SEPOLIA API  URL
@@ -13,16 +13,18 @@ const contract = require("../artifacts/contracts/MyNFT.sol/MyNFT.json");
 // Create a signer
 const privateKey = process.env.ACCOUNT_PRIVATE_KEY
 const signer = new ethers.Wallet(privateKey, provider)
+const TOKENURI = process.env.TOKENURI
+
 
 // Get contract ABI and address
 const abi = contract.abi
-const contractAddress = '0xA4766Ceb9E84a71D282A4CED9fB8Fe93C49b2Ff7'
+const contractAddress = process.env.DEPLOYED_NFT_CONTRACT
 
 // Create a contract instance
 const myNftContract = new ethers.Contract(contractAddress, abi, signer)
 
 // Get the NFT Metadata IPFS URL
-const tokenUri = "https://gateway.pinata.cloud/ipfs/QmZKMnmVLre9c9cxKCd4DXZzv6etAtQQrryDGMKtsRaqNR"
+const tokenUri = `https://gateway.pinata.cloud/ipfs/${TOKENURI}`
 
 // Call mintNFT function
 const mintNFT = async () => {

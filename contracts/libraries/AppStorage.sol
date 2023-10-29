@@ -6,11 +6,13 @@ import {LibDiamond} from "../libraries/LibDiamond.sol";
 
 struct Content {
 
+      uint256 contentID;
+
       string contentName;
 
       address contentCreator;
-
-      uint256 contentID;
+      
+      string contentDescription;
 
       bool flagged;
 
@@ -20,23 +22,25 @@ struct Content {
 
       string reasonForFlagging;
 
-      string contentDescription;
+      uint256 validatorsYesVotes;
+      
+      uint256 validatorsNoVotes;
+     
+      uint256 generalYesVotes;
 
-      bool isVotedOn;
+      uint256 generalNoVotes;
 
-      address[] voters;
+      bool validatorsApprovedForRedFlagging;
+     
+      bool isRedFlagged;
 
-      uint256 totalVoteCount;
+      uint256 totalGeneralVotesCount;
 
-      uint256 flaggedVotes;
-
-      uint256 yesVotes;
-
-      uint256 noVotes;
+      uint256 totalValidatorsVotesCount;
 
 }
 
-struct flaggedContent {
+struct redFlaggedContent {
 
       uint256 contentID;
 
@@ -50,11 +54,9 @@ struct VotersDetails {
 
       address voterAddress;
 
-      bool hasVoted;
-
-      bool vote;
-
       bool verified;
+
+      mapping(uint256 => bool) hasVotedOnContent;
       
 }
 
@@ -63,29 +65,31 @@ struct AppStorage {
 
     // FlagContent Facet
 
-    address _tokenAddress;
+    address _jiggyTokenAddress;
+    
+    address _membershipNftAddress;
 
-    address _nftAddress;
+    address _validatorNftAddress;
 
-    uint256 _totalFlaggedContent;
+    uint256 _totalFlaggedContent; 
 
-    uint256 _voteCount;
-
-    uint256 _votingTime;
+    uint256 _totalRedFlaggedContent;
 
     uint256 _totalVoters;
 
+    uint256  votingDeadline; 
+    
     bool _isVotingOn;
 
 mapping(uint256 => Content) ContentBank;
 
-// mapping(address => bool) EligibleVoters;
-
-address[] EligibleVoters;
-
 mapping (address => VotersDetails) Voters;
 
-mapping(uint256 => flaggedContent) flaggedContents;
+mapping(uint256 => redFlaggedContent) redFlaggedContents;
+
+mapping(address => mapping(uint256 => bool)) validatorsVotes;
+
+mapping(address => mapping(uint256 => bool)) generalVotes;
 
 }
 

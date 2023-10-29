@@ -9,41 +9,6 @@ We also have one of the frenliest communities in crypto, so don't hesitate to ho
 Twikkle Discord: https://discord.gg/dAxGUfss
 
 
-## Deployed Contract Addresses:
-
-Twikkle smart contract was deployed on the Sepolia blockchain. Below are the deployed Diamond addresses:
-
-TwikklToken deployed to: 0x50886AB774220706744394F351ee468952eC6112
-
-TwikklNFT deployed to: 0x5fb238aDe346aD2e0943bA5F793d94575F301603
-
-DiamondCutFacet deployed: 0xcf4CD5d6B6c7820b6aEE616E86EE06CCdBbBd041<br>
-
-Diamond deployed: 0x67b14a18AE7418B934510A09BBc67547ae538c17<br>
-
-DiamondInit deployed: 0x6737CaAf13D3b1967613c7456025B9a40Fab395c<br>
-
-DiamondLoupeFacet deployed: 0x72733f8529D26AAd7ef58f32FA8D075A78aBE1F4<br>
-
-OwnershipFacet deployed: 0xE73243df409723360903Df7389D1927806c5Cc55<br>
-
-VoteContentFacet deployed: 0xa15c9BB409F780379A57d3a9e9a74e6B348D5e19<br>
-
-FlagContentFacet deployed: 0xd143Ee48FB75CC1c8D5fE2b07375Aa6aeC34D2ea<br>
-
-MerkleTreeFacet deployed: 0x549dC79b8cbd24DFd0aEB7dc030DdCA4494D73EB<br>
-
-
-## Resources
-Official docs: Coming soon!
-
-Louper Dev Diamond Explorer: https://louper.dev/diamond/0x67b14a18AE7418B934510A09BBc67547ae538c17?network=sepolia
-
-Official Subgraph: Coming soon!
-
-EIP2535 Primer: https://eips.ethereum.org/EIPS/eip-2535
-
-
 ## Installation
 
 - Clone this repo
@@ -67,11 +32,90 @@ $ npx hardhat compile
 $ npx hardhat run scripts/deploy.js
 ```
 
+## Verify diamond contract on etherscan
+
+### Hardhat
+
+```bash
+$ npx hardhat verify --network netwokName diamond_contract_address contract_owner_address diamondcut_facet_address
+```
+
+## Verify contract on etherscan
+
+### Hardhat
+
+```bash
+$ npx hardhat verify --network netwokName contract_address
+```
+
 ### Foundry
 
 ```bash
 $ forge t
 ```
+
+
+## Deployed Contract Addresses:
+
+Twikkle smart contract was deployed on the Sepolia blockchain. Below are the deployed Diamond addresses:
+
+TwikklToken deployed to Sepolia: 0x50886AB774220706744394F351ee468952eC6112
+
+TwikklNFT deployed to:
+
+// Sepolia Testnet Contract Address
+
+DiamondCutFacet deployed: 0xcB1b2130E0069384C187c2D11325B91D1da608Ae
+
+Diamond deployed: 0x6b9C0b9287bF15a88492A9f3D9C48E538fE7Ca37
+
+DiamondInit deployed: 0x6d62169396b00e4a59350689db105aeF8fd05605
+
+DiamondLoupeFacet deployed: 0xaF2c01DA73FD81ea010f167B71668941cD6A9782
+
+OwnershipFacet deployed: 0xd3BE7B5c2246de2Ee62fbBb171212818BE15B9b2
+
+VoteContentFacet deployed: 0xF555c624CC0B78A84dbf94777B965414BCdeE581
+
+
+// Mumbai Testnet Contract Address
+
+DiamondCutFacet deployed: 0xcB1b2130E0069384C187c2D11325B91D1da608Ae<br>
+
+Diamond deployed: 0x6b9C0b9287bF15a88492A9f3D9C48E538fE7Ca37<br>
+
+DiamondInit deployed: 0x6d62169396b00e4a59350689db105aeF8fd05605<br>
+
+DiamondLoupeFacet deployed: 0xaF2c01DA73FD81ea010f167B71668941cD6A9782<br>
+
+OwnershipFacet deployed: 0xd3BE7B5c2246de2Ee62fbBb171212818BE15B9b2<br>
+
+VoteContentFacet deployed: 0xF555c624CC0B78A84dbf94777B965414BCdeE581<br>
+
+
+// Georli Testnet Contract Address
+
+DiamondCutFacet deployed: 0xF555c624CC0B78A84dbf94777B965414BCdeE581
+
+Diamond deployed: 0x1C80420A98C72b4D697fB659C9BBF15fe39EBb4F
+
+DiamondInit deployed: 0x9Be59BEd24E6D75dFBb0a194096DbE0e797Ea49c
+
+DiamondLoupeFacet deployed: 0x5149f0F28572E1a7cE8Cfe8a7dCb79356064f6C0
+
+OwnershipFacet deployed: 0xC3c1d8061d4B0f1399F4baA5F058b544eA6CAb26
+
+VoteContentFacet deployed: 0xAFc5d8C7Fb1a254dd9AF68b1cDAd34a12E6ac6eB
+
+
+## Resources
+Official docs: Coming soon!
+
+Louper Dev Diamond Explorer: https://louper.dev/diamond/COMING_SOON?network=sepolia
+
+Official Subgraph: Coming soon!
+
+EIP2535 Primer: https://eips.ethereum.org/EIPS/eip-2535
 
 `Note`: A lot of improvements are still needed so contributions are welcome!!
 

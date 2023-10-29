@@ -1,9 +1,6 @@
-//require("@nomiclabs/hardhat-waffle");
-// require("@nomiclabs/hardhat-etherscan");
+require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-ethers");
 require("dotenv").config({ path: ".env" });
-// const tdly = require("@tenderly/hardhat-tenderly");
-// tdly.setup();
 
 
 const ALCHEMY_GOERLI_API_KEY_URL = process.env.ALCHEMY_GOERLI_API_KEY_URL;
@@ -19,6 +16,8 @@ const ACCOUNT_PRIVATE_KEY = process.env.ACCOUNT_PRIVATE_KEY;
 // const ACCOUNT_PRIVATE_KEY2 = process.env.ACCOUNT_PRIVATE_KEY2;
 
 const INFURA_MAINNET_API_URL = process.env.INFURA_MAINNET_API_KEY_URL;
+
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 
 module.exports = {
   solidity: "0.8.17",
@@ -46,6 +45,6 @@ module.exports = {
     }
   },
   etherscan: {
-    apiKey: "API_TOKEN"
+    apiKey: [ETHERSCAN_API_KEY]
   }
 };
