@@ -61,18 +61,18 @@ Twikkle smart contract was deployed on the Sepolia blockchain. Below are the dep
 
 // ZKSYNC TESTNET
 
-TwikklNFT was deployed to 0x3267ea8b87988cB53F43F790F54FA302DEe23395
-TwikklToken was deployed to 0x5B932aeb47f5a02881cD31ff44157E6902Ec6cE4
-VoteContent Contract was deployed to 0xc6d5FC4d0d055812b072e5527Cd3caA6D2F5F67C
+TwikklNFT was deployed to 0x3267ea8b87988cB53F43F790F54FA302DEe23395<br>
+TwikklToken was deployed to 0x5B932aeb47f5a02881cD31ff44157E6902Ec6cE4<br>
+VoteContent Contract was deployed to 0xc6d5FC4d0d055812b072e5527Cd3caA6D2F5F67C<br>
 
 // ZKSYNC MAINNET
 
 TwikklNFT was deployed to 
-0x5B932aeb47f5a02881cD31ff44157E6902Ec6cE4
+0x5B932aeb47f5a02881cD31ff44157E6902Ec6cE4<br>
 TwikklToken was deployed to 
-0x3267ea8b87988cB53F43F790F54FA302DEe23395
+0x3267ea8b87988cB53F43F790F54FA302DEe23395<br>
 VoteContent Contract was deployed to 
-0xc6d5FC4d0d055812b072e5527Cd3caA6D2F5F67C
+0xc6d5FC4d0d055812b072e5527Cd3caA6D2F5F67C<br>
 
 // SEPOLIA TESTNET
 TwikklToken deployed to Sepolia: 0x50886AB774220706744394F351ee468952eC6112
