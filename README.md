@@ -59,6 +59,22 @@ $ forge t
 
 Twikkle smart contract was deployed on the Sepolia blockchain. Below are the deployed Diamond addresses:
 
+// ZKSYNC TESTNET
+
+TwikklNFT was deployed to 0x3267ea8b87988cB53F43F790F54FA302DEe23395
+TwikklToken was deployed to 0x5B932aeb47f5a02881cD31ff44157E6902Ec6cE4
+VoteContent Contract was deployed to 0xc6d5FC4d0d055812b072e5527Cd3caA6D2F5F67C
+
+// ZKSYNC MAINNET
+
+TwikklNFT was deployed to 
+0x5B932aeb47f5a02881cD31ff44157E6902Ec6cE4
+TwikklToken was deployed to 
+0x3267ea8b87988cB53F43F790F54FA302DEe23395
+VoteContent Contract was deployed to 
+0xc6d5FC4d0d055812b072e5527Cd3caA6D2F5F67C
+
+// SEPOLIA TESTNET
 TwikklToken deployed to Sepolia: 0x50886AB774220706744394F351ee468952eC6112
 
 TwikklNFT deployed to:
