@@ -57,6 +57,10 @@ module.exports = {
       accounts: [ACCOUNT_PRIVATE_KEY],
       gasLimit: 500000000,
     },
+    polygon: {
+      url: "https://polygon-mainnet.g.alchemy.com/v2/key",
+      accounts: [ACCOUNT_PRIVATE_KEY],
+    },
   },
   etherscan: {
     apiKey: [ETHERSCAN_API_KEY]
